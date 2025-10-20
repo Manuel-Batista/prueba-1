@@ -1,0 +1,164 @@
+/* ======== Variables Globales de Color ======== */
+:root {
+    --primary-color: #000000;
+    --bg-light: #000000;
+    --text-light: #ffffff;
+    --bg-dark: #003400;
+    --text-dark: #ffffff;
+}
+
+/* ======== Estilos Base ======== */
+html {
+    /* Offset para el smooth scroll por el navbar fijo */
+    scroll-padding-top: 70px;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ajuste para que las secciones tengan el padding del navbar */
+section {
+    padding-top: 70px;
+}
+
+/* ======== Modo Oscuro (Dark Mode) ======== */
+body.dark {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+}
+
+/* Sobrescrituras específicas para Bootstrap en Dark Mode */
+body.dark .bg-light {
+    background-color: var(--bg-dark) !important;
+}
+
+body.dark .card {
+    background: var(--bg-dark);
+    color: var(--text-dark);
+    border-color: var(--primary-color);
+}
+
+body.dark .navbar.bg-light {
+    background-color: var(--bg-dark) !important;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+body.dark .navbar-brand,
+body.dark .nav-link {
+    color: var(--text-dark) !important;
+}
+
+body.dark .nav-link:hover {
+    color: var(--primary-color) !important;
+}
+
+/* Soluciona el icono de GitHub (que usa .text-dark) */
+body.dark .text-dark {
+    color: var(--text-light) !important;
+}
+
+/* Sobrescribe el color de inputs en modo oscuro */
+body.dark .form-control {
+    background-color: #126517e1;
+    color: var(--text-dark);
+    border-color: var(--primary-color);
+}
+
+body.dark .form-control::placeholder {
+    color: #ede7e7b1;
+}
+
+body.dark .form-control:focus {
+    background-color: #04955489;
+    color: var(--text-dark);
+}
+
+/* ======== Homepage (Hero) ======== */
+#home {
+    /* Fondo con gradiente animado */
+    background: linear-gradient(-45deg, #0c3500, #01160a, #035d3c, #135900);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Animación de entrada */
+#home img, #home h1, #home p {
+    animation: fadeInUp 1.5s ease-out;
+    animation-fill-mode: backwards; /* Asegura que empieza invisible */
+}
+
+#home h1 { animation-delay: 0.5s; }
+#home p  { animation-delay: 1.0s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ======== Proyectos ======== */
+.project-card {
+    border: 2px solid var(--primary-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Animación de pulso sutil */
+    animation: heartbeat 3s infinite ease-in-out;
+}
+
+.project-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 1rem 3rem rgba(31, 255, 15, 0.175) !important;
+    animation-play-state: paused; /* Pausa el pulso al hacer hover */
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+/* ======== Experiencia ======== */
+.experience-card {
+    transition: transform 0.3s ease;
+}
+
+.experience-card:hover {
+    transform: translateY(-10px);
+}
+
+/* ======== Contacto ======== */
+#contact .fab {
+    margin: 0 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+#contact .fab:hover {
+    transform: scale(1.2);
+}
+
+/* ======== Media Queries (Responsive) ======== */
+@media (max-width: 768px) {
+    .display-5 {
+        font-size: 2.5rem; /* Reduce el tamaño de los títulos en móviles */
+    }
+    
+    #home h1 {
+        font-size: 2.8rem;
+    }
+}
