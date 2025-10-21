@@ -7,6 +7,7 @@
     --text-dark: #f0f0f0;
     --card-dark: #1e1e1e;
     --border-dark: #333333;
+    --footer-bg: #1a1a1a; /* Color oscuro constante para la sección Contacto/Footer */
 }
 
 /* ======== Estilos Base ======== */
@@ -31,14 +32,14 @@ section {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* MEJORA 5: Estilo para los iconos de habilidades */
+/* Estilo para los iconos de habilidades */
 .skill-icon {
-    filter: grayscale(0.2); /* Ligeramente opacos en modo claro */
+    filter: grayscale(0.2);
     transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .skill-icon:hover {
-    filter: grayscale(0); /* A color al hacer hover */
+    filter: grayscale(0);
     transform: scale(1.1);
 }
 
@@ -54,7 +55,7 @@ body.dark .bg-light {
 }
 
 body.dark #projects {
-    background-color: var(--bg-dark); /* Asegura que la sección de proyectos mantenga el fondo oscuro */
+    background-color: var(--bg-dark); 
 }
 
 body.dark .card {
@@ -66,6 +67,9 @@ body.dark .card {
 body.dark .modal-content {
     background: var(--card-dark);
     color: var(--text-dark);
+}
+body.dark .modal-header .btn-close {
+    filter: invert(1);
 }
 
 body.dark .navbar.bg-light {
@@ -107,6 +111,50 @@ body.dark .form-control:focus {
 
 body.dark .text-muted {
     color: #b0b0b0 !important;
+}
+
+/* Ajuste para los Badges en el modo oscuro */
+body.dark .badge {
+    opacity: 0.8; 
+}
+
+
+/* ======== ESTILOS DE LA SECCIÓN CONTACTO (TIPO FOOTER) ======== */
+
+/* Asegura un color oscuro constante para la sección contact, independientemente del modo (CORRECCIÓN) */
+#contact {
+    background-color: var(--footer-bg) !important; 
+    color: #ffffff !important;
+}
+
+/* Estilos de los enlaces de navegación */
+.footer-link {
+    color: rgba(255, 255, 255, 0.75); /* Enlaces con tono grisáceo */
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: block; 
+    padding: 2px 0;
+    font-size: 0.95rem;
+}
+
+.footer-link:hover {
+    color: var(--primary-color); 
+}
+
+/* Ajuste para asegurar que el color de texto e iconos sea blanco/claro en el fondo oscuro de #contact (CORRECCIÓN) */
+#contact h5, #contact h6 {
+    color: #ffffff !important;
+}
+#contact .social-icon {
+    /* Ajusta el espaciado entre los iconos sociales */
+    margin-right: 15px; 
+}
+#contact .text-muted.small {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+/* Asegura que el icono de GitHub sea blanco en esta sección (CORRECCIÓN) */
+#contact .fa-github {
+    color: #ffffff !important; 
 }
 
 
@@ -158,7 +206,7 @@ body.dark .text-muted {
     }
 }
 
-/* ======== MEJORA 3: Animaciones al Hacer Scroll (Scroll Reveal) ======== */
+/* ======== Animaciones al Hacer Scroll (Scroll Reveal) ======== */
 .reveal {
     position: relative;
     opacity: 0;
@@ -169,13 +217,4 @@ body.dark .text-muted {
 .reveal.active {
     opacity: 1;
     transform: translateY(0);
-}
-
-/* Ajustes finos para la animación */
-.reveal.active .project-card,
-.reveal.active .experience-card,
-.reveal.active .skill-icon {
-    /* Si ya están animados por la clase general, quitamos el efecto */
-    opacity: 1;
-    transform: none;
 }

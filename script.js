@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbarToggler = document.querySelector('.navbar-toggler');
     
     // ===================================
-    // === MEJORA 1: Lógica del Typewriter ===
+    // === Lógica del Typewriter ===
     // ===================================
     const typewriterText = document.getElementById('typewriter-text');
     const phrases = [
@@ -26,36 +26,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentPhrase = phrases[phraseIndex];
         
         if (isDeleting) {
-            // Modo borrado
             typewriterText.textContent = currentPhrase.substring(0, charIndex - 1);
             charIndex--;
-            typingSpeed = 50; // Velocidad de borrado más rápida
+            typingSpeed = 50; 
         } else {
-            // Modo escritura
             typewriterText.textContent = currentPhrase.substring(0, charIndex + 1);
             charIndex++;
-            typingSpeed = 100; // Velocidad de tipeo normal
+            typingSpeed = 100; 
         }
 
         if (!isDeleting && charIndex === currentPhrase.length) {
-            // Pausa al terminar de escribir
             typingSpeed = 2000;
             isDeleting = true;
         } else if (isDeleting && charIndex === 0) {
-            // Pausa al terminar de borrar, pasa a la siguiente frase
             isDeleting = false;
             phraseIndex = (phraseIndex + 1) % phrases.length;
-            typingSpeed = 500; // Pequeña pausa antes de escribir la siguiente
+            typingSpeed = 500; 
         }
 
         setTimeout(typeWriter, typingSpeed);
     }
     
-    // Iniciar el efecto de tipeo después de la animación del Hero
     setTimeout(typeWriter, 2000); 
 
     // ===================================
-    // === Lógica de Smooth Scroll (sin cambios) ===
+    // === Lógica de Smooth Scroll ===
     // ===================================
     const navLinks = document.querySelectorAll('.nav-link');
 
@@ -86,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ===================================
-    // === Lógica del Dark Mode (sin cambios) ===
+    // === Lógica del Dark Mode ===
     // ===================================
     const applyTheme = (theme) => {
         if (theme === 'dark') {
@@ -120,38 +115,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ===================================
-    // === Lógica del Formulario de Contacto (sin cambios) ===
-    // ===================================
-    const contactForm = document.getElementById('contactForm');
-
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // Simulación de envío con confirmación más amigable
-        alert('¡Mensaje enviado con éxito! Me pondré en contacto contigo pronto. 📧');
-        
-        contactForm.reset();
-    });
+    // === NOTA: Se ha eliminado la lógica del formulario de contacto ===
     
     // =======================================
-    // === MEJORA 3: Lógica del Scroll Reveal (IntersectionObserver) ===
+    // === Lógica del Scroll Reveal (IntersectionObserver) ===
     // =======================================
     const revealElements = document.querySelectorAll('.reveal');
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Si el elemento entra en el viewport
                 entry.target.classList.add('active');
-                observer.unobserve(entry.target); // Dejar de observar una vez que se activa
+                observer.unobserve(entry.target); 
             }
         });
     }, {
-        // Opciones del observador
-        root: null, // El viewport
+        root: null, 
         rootMargin: '0px',
-        threshold: 0.1 // Activar cuando el 10% del elemento sea visible
+        threshold: 0.1 
     });
 
     revealElements.forEach(element => {
