@@ -1,10 +1,12 @@
 /* ======== Variables Globales de Color ======== */
 :root {
-    --primary-color: #000000;
-    --bg-light: #000000;
-    --text-light: #ffffff;
-    --bg-dark: #003400;
-    --text-dark: #ffffff;
+    --primary-color: #0d6efd; /* Cambiado a un color Bootstrap estándar */
+    --bg-light: #ffffff;
+    --text-light: #333333;
+    --bg-dark: #121212;
+    --text-dark: #f0f0f0;
+    --card-dark: #1e1e1e;
+    --border-dark: #333333;
 }
 
 /* ======== Estilos Base ======== */
@@ -24,6 +26,22 @@ section {
     padding-top: 70px;
 }
 
+/* Estilo para las tarjetas de proyectos y experiencia */
+.project-card, .experience-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* MEJORA 5: Estilo para los iconos de habilidades */
+.skill-icon {
+    filter: grayscale(0.2); /* Ligeramente opacos en modo claro */
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.skill-icon:hover {
+    filter: grayscale(0); /* A color al hacer hover */
+    transform: scale(1.1);
+}
+
 /* ======== Modo Oscuro (Dark Mode) ======== */
 body.dark {
     background-color: var(--bg-dark);
@@ -32,18 +50,27 @@ body.dark {
 
 /* Sobrescrituras específicas para Bootstrap en Dark Mode */
 body.dark .bg-light {
-    background-color: var(--bg-dark) !important;
+    background-color: var(--card-dark) !important;
+}
+
+body.dark #projects {
+    background-color: var(--bg-dark); /* Asegura que la sección de proyectos mantenga el fondo oscuro */
 }
 
 body.dark .card {
-    background: var(--bg-dark);
+    background: var(--card-dark);
     color: var(--text-dark);
-    border-color: var(--primary-color);
+    border: 1px solid var(--border-dark);
+}
+
+body.dark .modal-content {
+    background: var(--card-dark);
+    color: var(--text-dark);
 }
 
 body.dark .navbar.bg-light {
-    background-color: var(--bg-dark) !important;
-    border-bottom: 1px solid var(--primary-color);
+    background-color: var(--card-dark) !important;
+    border-bottom: 1px solid var(--border-dark);
 }
 
 body.dark .navbar-brand,
@@ -62,23 +89,29 @@ body.dark .text-dark {
 
 /* Sobrescribe el color de inputs en modo oscuro */
 body.dark .form-control {
-    background-color: #126517e1;
+    background-color: var(--border-dark);
     color: var(--text-dark);
-    border-color: var(--primary-color);
+    border-color: var(--border-dark);
 }
 
 body.dark .form-control::placeholder {
-    color: #ede7e7b1;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 body.dark .form-control:focus {
-    background-color: #04955489;
+    background-color: var(--border-dark);
     color: var(--text-dark);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
+
+body.dark .text-muted {
+    color: #b0b0b0 !important;
+}
+
 
 /* ======== Homepage (Hero) ======== */
 #home {
-    /* Fondo con gradiente animado */
     background: linear-gradient(-45deg, #0c3500, #01160a, #035d3c, #135900);
     background-size: 400% 400%;
     animation: gradientShift 15s ease infinite;
@@ -90,14 +123,29 @@ body.dark .form-control:focus {
     100% { background-position: 0% 50%; }
 }
 
-/* Animación de entrada */
-#home img, #home h1, #home p {
+/* Estilo para el cursor de tipeo */
+#typewriter-text {
+    border-right: 2px solid rgba(255, 255, 255, 0.75);
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0 auto;
+    display: inline-block;
+    animation: 
+        blink-caret 0.75s step-end infinite;
+}
+/* La animación de 'tipeo' real se maneja por JavaScript */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: rgba(255, 255, 255, 0.75); }
+}
+
+/* Animación de entrada para el nombre (manteniendo la que tenías) */
+#home img, #home h1 {
     animation: fadeInUp 1.5s ease-out;
-    animation-fill-mode: backwards; /* Asegura que empieza invisible */
+    animation-fill-mode: backwards;
 }
 
 #home h1 { animation-delay: 0.5s; }
-#home p  { animation-delay: 1.0s; }
 
 @keyframes fadeInUp {
     from {
@@ -110,55 +158,24 @@ body.dark .form-control:focus {
     }
 }
 
-/* ======== Proyectos ======== */
-.project-card {
-    border: 2px solid var(--primary-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* Animación de pulso sutil */
-    animation: heartbeat 3s infinite ease-in-out;
+/* ======== MEJORA 3: Animaciones al Hacer Scroll (Scroll Reveal) ======== */
+.reveal {
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
 }
 
-.project-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 1rem 3rem rgba(31, 255, 15, 0.175) !important;
-    animation-play-state: paused; /* Pausa el pulso al hacer hover */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-@keyframes heartbeat {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.02);
-    }
-}
-
-/* ======== Experiencia ======== */
-.experience-card {
-    transition: transform 0.3s ease;
-}
-
-.experience-card:hover {
-    transform: translateY(-10px);
-}
-
-/* ======== Contacto ======== */
-#contact .fab {
-    margin: 0 0.5rem;
-    transition: transform 0.3s ease;
-}
-
-#contact .fab:hover {
-    transform: scale(1.2);
-}
-
-/* ======== Media Queries (Responsive) ======== */
-@media (max-width: 768px) {
-    .display-5 {
-        font-size: 2.5rem; /* Reduce el tamaño de los títulos en móviles */
-    }
-    
-    #home h1 {
-        font-size: 2.8rem;
-    }
+/* Ajustes finos para la animación */
+.reveal.active .project-card,
+.reveal.active .experience-card,
+.reveal.active .skill-icon {
+    /* Si ya están animados por la clase general, quitamos el efecto */
+    opacity: 1;
+    transform: none;
 }
